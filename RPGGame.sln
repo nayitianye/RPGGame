@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2.CharacterTroops", "Charac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3.GameMap", "GameMap\3.GameMap.csproj", "{CE7995CE-71C5-424B-8D79-5A88DAEB66B6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4.NpcCharacter", "NpcCharacter\4.NpcCharacter.csproj", "{60D6895F-831C-4B44-92AF-678090A5B7C9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{CE7995CE-71C5-424B-8D79-5A88DAEB66B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE7995CE-71C5-424B-8D79-5A88DAEB66B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE7995CE-71C5-424B-8D79-5A88DAEB66B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60D6895F-831C-4B44-92AF-678090A5B7C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60D6895F-831C-4B44-92AF-678090A5B7C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60D6895F-831C-4B44-92AF-678090A5B7C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60D6895F-831C-4B44-92AF-678090A5B7C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

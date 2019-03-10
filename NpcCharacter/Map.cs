@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace GameMap
+namespace NpcCharacter
 {
     public class Map
     {

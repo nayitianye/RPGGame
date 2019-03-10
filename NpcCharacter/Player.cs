@@ -2,7 +2,7 @@
 using System.Drawing;
 
 
-namespace GameMap
+namespace NpcCharacter
 {
     public class Player
     {

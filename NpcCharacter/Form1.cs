@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace GameMap
+namespace NpcCharacter
 {
     public partial class Form1 : Form
     {
@@ -22,7 +22,7 @@ namespace GameMap
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            Player.Key_controller(player,maps, e);
+            Player.Key_controller(player, maps, e);
             Draw();
         }
 
@@ -39,7 +39,7 @@ namespace GameMap
             BufferedGraphics bufferedGraphics = graphicsContext.Allocate(graphics, this.DisplayRectangle);
             Graphics graphics1 = bufferedGraphics.Graphics;
             //自定义的绘图
-            Map.Draw(maps,player,graphics1,new Rectangle(0,0,stage.Width,stage.Height));
+            Map.Draw(maps, player, graphics1, new Rectangle(0, 0, stage.Width, stage.Height));
             //显示图像并释放缓存
             bufferedGraphics.Render();
             bufferedGraphics.Dispose();
@@ -76,7 +76,7 @@ namespace GameMap
             maps[1].block_path = "map2_block.png";
             maps[1].music_path = "2.mp3";
 
-            Map.change_map(maps, player, 0, 30, 500, 1,music_player);
+            Map.change_map(maps, player, 0, 30, 500, 1, music_player);
         }
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
