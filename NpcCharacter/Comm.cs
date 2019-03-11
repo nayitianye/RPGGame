@@ -14,5 +14,14 @@ namespace NpcCharacter
             TimeSpan timespan = DateTime.Now - datetime;
             return (long)timespan.TotalMilliseconds;
         }
+
+        //定义枚举判断方向
+        public enum Direction
+        {
+            UP=4,
+            DOWN=1,
+            RIGHT=3,
+            LEFT=2,
+        }
     }
 }

@@ -21,6 +21,9 @@ namespace NpcCharacter
 
         public int x_offset = -120;
         public int y_offset = -120;  //图片的偏移位置
+
+        //碰撞(角色)
+        public int collision_ray = 50;
         public Player()
         {
             bitmap = new Bitmap(@"r1.png");
@@ -31,7 +34,7 @@ namespace NpcCharacter
         /// </summary>
         /// <param name="players"></param>
         /// <param name="e"></param>
-        public static void Key_controller(Player[] players,Map[] maps,KeyEventArgs e)
+        public static void Key_controller(Player[] players,Map[] maps,Npc[] npcs,KeyEventArgs e)
         {
             Player player = players[current_player];
             //切换角色
@@ -39,45 +42,60 @@ namespace NpcCharacter
             {
                 Key_change_player(players);
             }
-            //切换方向
-            if (e.KeyCode == Keys.W&&player.face!=4)
+             
+            //行走
+            if (e.KeyCode == Keys.W)
             {
-                //player.y = player.y - 5;
-                //Console.WriteLine("x="+x+"y="+y);
-                player.face = 4;
-            }
-            if (e.KeyCode == Keys.S && player.face != 1)
+                Walk(players,maps,Comm.Direction.UP);
+            }else if(e.KeyCode == Keys.S)
             {
-                //player.y = player.y + 5;
-                player.face = 1;
+                Walk(players, maps, Comm.Direction.DOWN);
             }
-            if (e.KeyCode == Keys.A && player.face != 2)
+            else if (e.KeyCode == Keys.A)
             {
-                //player.x = player.x - 5;
-                player.face = 2;
+                Walk(players, maps, Comm.Direction.LEFT);
             }
-            if (e.KeyCode == Keys.D && player.face != 3)
+            else if (e.KeyCode == Keys.D)
             {
-                //player.x = player.x + 5;
-                player.face = 3;
+                Walk(players, maps, Comm.Direction.RIGHT);
             }
+            //动画帧
+            Npc_collision(players, maps, npcs, e);
+        }
+        /// <summary>
+        /// 角色行走的函数
+        /// </summary>
+        /// <param name="players"></param>
+        /// <param name="maps"></param>
+        /// <param name="direction"></param>
+        public static void Walk(Player[] players,Map[] maps,Comm.Direction direction)
+        {
+            Player player = players[current_player];
+            //转向
+            player.face = (int)direction;
+            //间隔判定
             if (Comm.Time() - player.last_walk_time <= player.walk_interval)
             {
                 return;
             }
-            //移动处理
-            if (e.KeyCode == Keys.W&& Map.Is_through(maps, player.x, player.y - player.speed))
+            //行走
+            //up
+            if (direction == Comm.Direction.UP&&Map.Is_through(maps,player.x,player.y-player.speed))
             {
                 player.y = player.y - player.speed;
-            }else if(e.KeyCode == Keys.S && Map.Is_through(maps, player.x, player.y +player.speed))
+            }
+            //down
+            if (direction == Comm.Direction.DOWN && Map.Is_through(maps, player.x, player.y + player.speed))
             {
                 player.y = player.y + player.speed;
             }
-            else if (e.KeyCode == Keys.A && Map.Is_through(maps, player.x-player.speed, player.y))
+            //right
+            if (direction == Comm.Direction.LEFT && Map.Is_through(maps, player.x-player.speed, player.y ))
             {
                 player.x = player.x - player.speed;
             }
-            else if (e.KeyCode == Keys.D && Map.Is_through(maps, player.x + player.speed, player.y))
+            //left
+            if (direction == Comm.Direction.RIGHT && Map.Is_through(maps, player.x+player.speed, player.y ))
             {
                 player.x = player.x + player.speed;
             }
@@ -87,15 +105,9 @@ namespace NpcCharacter
             {
                 player.anm_frame = 0;
             }
+            //时间
             player.last_walk_time = Comm.Time();
         }
-        /*public static void Draw(Player[] players,Graphics graphics1)
-        {
-            Player player = players[current_player];
-            Rectangle rectangle = new Rectangle(player.bitmap.Width / 4 * (player.anm_frame % 4), player.bitmap.Height / 4 * (player.face - 1), player.bitmap.Width / 4, player.bitmap.Height / 4);  //自定义区间
-            Bitmap bitmap0 = player.bitmap.Clone(rectangle, player.bitmap.PixelFormat);//复制小图
-            graphics1.DrawImage(bitmap0, player.x, player.y);
-        }*/
 
         public static void Draw(Player[] players, Graphics graphics1,int map_sx,int map_sy)
         {
@@ -109,7 +121,76 @@ namespace NpcCharacter
             graphics1.DrawImage(bitmap0, map_sx+player.x+player.x_offset, map_sy+player.y+player.y_offset);
         }
 
-       
+        public static Point Get_collision_point(Player[] players)
+        {
+            Player player = players[current_player];
+            int collision_x = 0;
+            int collision_y = 0;
+
+            if (player.face == (int)Comm.Direction.UP)
+            {
+                collision_x = player.x;
+                collision_y = player.y - player.collision_ray;
+            }
+            if (player.face == (int)Comm.Direction.DOWN)
+            {
+                collision_x = player.x;
+                collision_y = player.y + player.collision_ray;
+            }
+            if (player.face == (int)Comm.Direction.LEFT)
+            {
+                collision_x = player.x - player.collision_ray;
+                collision_y = player.y;
+            }
+            if (player.face == (int)Comm.Direction.RIGHT)
+            {
+                collision_x = player.x + player.collision_ray;
+                collision_y = player.y;
+            }
+            return new Point(collision_x, collision_y);
+        }
+       /// <summary>
+       /// Npc碰撞函数
+       /// </summary>
+       /// <param name="players"></param>
+       /// <param name="maps"></param>
+       /// <param name="npcs"></param>
+       /// <param name="e"></param>
+        public static void Npc_collision(Player[] players,Map[] maps,Npc[] npcs,KeyEventArgs e)
+        {
+            Player player = players[current_player];
+            Point p1 = new Point(player.x, player.y);
+            Point p2 = Get_collision_point(players);//碰撞射线的端点
+
+            for(int i = 0; i < npcs.Length; i++)
+            {
+                if (npcs[i] == null)
+                {
+                    continue;
+                }
+                if (npcs[i].map != Map.current_map) //遍历NPC
+                {
+                    continue;
+                }
+
+                if (npcs[i].Is_line_collision(p1, p2))  //发生碰撞
+                {
+                    if (npcs[i].collosion_Type == Npc.Collosion_type.ENTER)   //碰撞触发
+                    {
+                        Task.story(i);      //发生事件
+                        break;
+                    }
+                    else if (npcs[i].collosion_Type == Npc.Collosion_type.KEY)  //按键触发
+                    {
+                        if (e.KeyCode == Keys.Space || e.KeyCode == Keys.Enter)
+                        {
+                            Task.story(i);  //发生事件
+                            break;
+                        }
+                    }
+                }
+            }
+        }
         /// <summary>
         /// 切换角色
         /// </summary>
@@ -133,7 +214,12 @@ namespace NpcCharacter
                 }
             }
         }
-
+        /// <summary>
+        ///设置角色的位置
+        /// </summary>
+        /// <param name="players"></param>
+        /// <param name="oldindex"></param>
+        /// <param name="newindex"></param>
         public static void  Set_player(Player[] players,int oldindex,int newindex)
         {
             current_player = newindex;
@@ -169,15 +255,15 @@ namespace NpcCharacter
         /// </summary>
         /// <param name="players"></param>
         /// <returns></returns>
-        public static int get_pos_x(Player[] players)
+        public static int Get_pos_x(Player[] players)
         {
             return players[current_player].x;
         }
-        public static int get_pos_y(Player[] players)
+        public static int Get_pos_y(Player[] players)
         {
             return players[current_player].y;
         }
-        public static int get_pos_f(Player[] players)
+        public static int Get_pos_f(Player[] players)
         {
             return players[current_player].face;
         }
