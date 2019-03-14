@@ -2,7 +2,7 @@
 using System.Drawing;
 
 
-namespace NpcCharacter
+namespace InterfaceSystem
 {
     public class Player
     {
@@ -25,7 +25,15 @@ namespace NpcCharacter
         //角色是否激活
         public int is_active = 0;  
         //碰撞(角色)
-        public int collision_ray = 50;
+        public int collision_ray = 80;
+        public enum Status
+        {
+            WALK=1,
+            PANEL=2,
+            TASK=3,
+            FIGHT=4,
+        }
+        public static Status status = Status.WALK;
         public Player()
         {
             bitmap = new Bitmap(@"r1.png");
@@ -38,6 +46,10 @@ namespace NpcCharacter
         /// <param name="e"></param>
         public static void Key_controller(Player[] players,Map[] maps,Npc[] npcs,KeyEventArgs e)
         {
+            if (Player.status != Status.WALK)
+            {
+                return;
+            }
             Player player = players[current_player];
             //切换角色
             if (e.KeyCode == Keys.Tab)
@@ -177,16 +189,16 @@ namespace NpcCharacter
 
                 if (npcs[i].Is_line_collision(p1, p2))  //发生碰撞
                 {
-                    if (npcs[i].collosion_Type == Npc.Collosion_type.ENTER)   //碰撞触发
+                    if (npcs[i].collosion_type == Npc.Collosion_type.ENTER)   //碰撞触发
                     {
-                        Task.story(i);      //发生事件
+                        Task.Story(i);      //发生事件
                         break;
                     }
-                    else if (npcs[i].collosion_Type == Npc.Collosion_type.KEY)  //按键触发
+                    else if (npcs[i].collosion_type== Npc.Collosion_type.KEY)  //按键触发
                     {
                         if (e.KeyCode == Keys.Space || e.KeyCode == Keys.Enter)
                         {
-                            Task.story(i);  //发生事件
+                            Task.Story(i);  //发生事件
                             break;
                         }
                     }

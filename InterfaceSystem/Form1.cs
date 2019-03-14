@@ -8,27 +8,22 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace NpcCharacter
+namespace InterfaceSystem
 {
     public partial class Form1 : Form
     {
         public static WMPLib.WindowsMediaPlayer music_player = new WMPLib.WindowsMediaPlayer();
         public static Player[] players = new Player[3];
         public static Map[] maps = new Map[2];
-        public static Npc[] npcs = new Npc[6]; 
+        public static Npc[] npcs = new Npc[6];
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
-        {
-            Player.Key_controller(players, maps, npcs, e);
-        }
-
         private void Draw()
         {
-           
+
             //创建在PictureBox1上的图像graphics
             Graphics graphics = stage.CreateGraphics();
             //将图像画在内存上，并使graphics为pictureBox1上的图像
@@ -36,14 +31,19 @@ namespace NpcCharacter
             BufferedGraphics bufferedGraphics = graphicsContext.Allocate(graphics, this.DisplayRectangle);
             Graphics graphics1 = bufferedGraphics.Graphics;
             //自定义的绘图
-            Map.Draw(maps, players,npcs, graphics1, new Rectangle(0, 0, stage.Width, stage.Height));
+            Map.Draw(maps, players, npcs, graphics1, new Rectangle(0, 0, stage.Width, stage.Height));
             //显示图像并释放缓存
+            if (Panel.panel != null)
+            {
+                Panel.Draw(graphics1);
+            }
             bufferedGraphics.Render();
             bufferedGraphics.Dispose();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            
             //player define
             players[0] = new Player();
             players[0].bitmap = new Bitmap(@"r1.png");
@@ -126,17 +126,34 @@ namespace NpcCharacter
             npcs[5].npc_type = Npc.Npc_type.CHARACTER;
             npcs[5].idle_walk_direction = Comm.Direction.LEFT;
             npcs[5].idle_walk_time = 20;
-            Map.Change_map(maps, players,npcs, 1, 800, 400, 1, music_player);
-        }
 
+            Map.Change_map(maps, players, npcs, 1, 800, 400, 1, music_player);
+            Message.Init();
+            Title.Init();
+           // Title.Show();
+           
+        }
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            Player.Key_controller(players, maps, npcs, e);
+            if (Panel.panel != null)
+            {
+                Panel.Key_ctrl(e);
+            }
+        }
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
             Player.Key_ctrl_up(players, e);
         }
 
+        //测谁按键
+        public void Tryevent()
+        {
+            MessageBox.Show("成功");
+        }
         private void timer1_Tick(object sender, EventArgs e)
         {
-            for(int i = 0; i < npcs.Length; i++)  //遍历当前场景的NPC
+            for (int i = 0; i < npcs.Length; i++)  //遍历当前场景的NPC
             {
                 if (npcs[i] == null)
                 {
@@ -150,5 +167,6 @@ namespace NpcCharacter
             }
             Draw();
         }
+
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace NpcCharacter
+namespace InterfaceSystem
 {
     public class Animation
     {
