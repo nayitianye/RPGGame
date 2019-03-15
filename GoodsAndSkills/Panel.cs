@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace MouseController
+namespace GoodsAndSkills
 {
     //定义面板
     public class Panel

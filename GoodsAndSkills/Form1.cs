@@ -1,8 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MouseController
+namespace GoodsAndSkills
 {
     public partial class Form1 : Form
     {
@@ -130,15 +136,15 @@ namespace MouseController
             mc_nomal.SetResolution(96, 96);
             mc_event = new Bitmap(@"mc_2.png");
             mc_event.SetResolution(96, 96);
-           
-            //Map.Change_map(maps, players, npcs, 1, 800, 400, 1, music_player);
-            Title.Init();
+
+            Map.Change_map(maps, players, npcs, 1, 800, 400, 1, music_player);
             Message.Init();
+            Title.Init();
             Title.Show();
 
         }
 
-        public void  Draw_mouse(Graphics graphics)
+        public void Draw_mouse(Graphics graphics)
         {
             Point showpoint = stage.PointToClient(Cursor.Position);
             if (mc_mod == 0)
@@ -189,7 +195,7 @@ namespace MouseController
         private void stage_MouseClick(object sender, MouseEventArgs e)
         {
             Npc.Mouse_click(maps, players, npcs, new Rectangle(0, 0, stage.Width, stage.Height), e);
-            Player.Mouse_click(maps, players, new Rectangle(0, 0, stage.Width, stage.Height), e); 
+            Player.Mouse_click(maps, players, new Rectangle(0, 0, stage.Width, stage.Height), e);
             if (Panel.panel != null)
             {
                 Panel.Mouse_move(e);

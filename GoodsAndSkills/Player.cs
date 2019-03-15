@@ -2,7 +2,7 @@
 using System.Drawing;
 
 
-namespace MouseController
+namespace GoodsAndSkills
 {
     public class Player
     {

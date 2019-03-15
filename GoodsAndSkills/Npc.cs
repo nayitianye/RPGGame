@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace MouseController
+namespace GoodsAndSkills
 {
     public class Npc
     {
@@ -250,7 +250,7 @@ namespace MouseController
                 }
                 int collision_x = e.X - Map.Get_map_sx(maps, players, stage);
                 int collision_y = e.Y - Map.Get_map_sy(maps, players, stage);
-                if (!npcs[i].Is_mouse_collision(collision_x, collision_x))
+                if (!npcs[i].Is_mouse_collision(collision_x, collision_y))
                 {
                     continue;
                 }

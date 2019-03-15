@@ -1,5 +1,5 @@
 ﻿using System.Windows.Forms;
-namespace InterfaceSystem
+namespace GoodsAndSkills
 {
     public class Task
     {
@@ -11,6 +11,7 @@ namespace InterfaceSystem
                 player_last_status = Player.status;
             }
             Player.status = Player.Status.TASK;
+            DialogResult r1;
             if (i == 0)
             {
                 Message.Show("主角","夏山如碧，绿树成荫，总会令人依然自乐。此地山清水秀，我十分喜爱。我们便约好了，闲暇时，便来此地，沏茶共饮。", "face1_1.png",Message.Face.LEFT);
