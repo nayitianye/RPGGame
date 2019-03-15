@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace InterfaceSystem
+namespace MouseController
 {
     public partial class Form1 : Form
     {
@@ -16,6 +10,10 @@ namespace InterfaceSystem
         public static Player[] players = new Player[3];
         public static Map[] maps = new Map[2];
         public static Npc[] npcs = new Npc[6];
+
+        public Bitmap mc_nomal;  //普通状态的光标
+        public Bitmap mc_event;  //事件状态下的光标
+        public int mc_mod = 0;//0-nomal 1-event
         public Form1()
         {
             InitializeComponent();
@@ -37,6 +35,7 @@ namespace InterfaceSystem
             {
                 Panel.Draw(graphics1);
             }
+            Draw_mouse(graphics1);
             bufferedGraphics.Render();
             bufferedGraphics.Dispose();
         }
@@ -126,11 +125,30 @@ namespace InterfaceSystem
             npcs[5].idle_walk_direction = Comm.Direction.LEFT;
             npcs[5].idle_walk_time = 20;
 
+            //光标
+            mc_nomal = new Bitmap(@"mc_1.png");
+            mc_nomal.SetResolution(96, 96);
+            mc_event = new Bitmap(@"mc_2.png");
+            mc_event.SetResolution(96, 96);
+           
             Map.Change_map(maps, players, npcs, 1, 800, 400, 1, music_player);
             Message.Init();
             Title.Init();
-           // Title.Show();
-           
+            Title.Show();
+
+        }
+
+        public void  Draw_mouse(Graphics graphics)
+        {
+            Point showpoint = stage.PointToClient(Cursor.Position);
+            if (mc_mod == 0)
+            {
+                graphics.DrawImage(mc_nomal, showpoint.X, showpoint.Y);
+            }
+            else
+            {
+                graphics.DrawImage(mc_event, showpoint.X, showpoint.Y);
+            }
         }
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -152,6 +170,7 @@ namespace InterfaceSystem
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
+            Player.Time_logic(players, maps);
             for (int i = 0; i < npcs.Length; i++)  //遍历当前场景的NPC
             {
                 if (npcs[i] == null)
@@ -167,5 +186,33 @@ namespace InterfaceSystem
             Draw();
         }
 
+        private void stage_MouseClick(object sender, MouseEventArgs e)
+        {
+            Player.Mouse_click(maps, players, new Rectangle(0, 0, stage.Width, stage.Height), e);
+            Npc.Mouse_click(maps, players, npcs, new Rectangle(0, 0, stage.Width, stage.Height), e);
+            if (Panel.panel != null)
+            {
+                Panel.Mouse_move(e);
+            }
+        }
+
+        private void stage_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (Panel.panel != null)
+            {
+                Panel.Mouse_click(e);
+            }
+            mc_mod = Npc.Check_mouse_collision(maps, players, npcs, new Rectangle(0, 0, stage.Width, stage.Height), e);
+        }
+
+        private void stage_MouseEnter(object sender, EventArgs e)
+        {
+            Cursor.Hide();
+        }
+
+        private void stage_MouseLeave(object sender, EventArgs e)
+        {
+            Cursor.Show();
+        }
     }
 }

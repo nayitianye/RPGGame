@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4.NpcCharacter", "NpcCharac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "5.InterfaceSystem", "InterfaceSystem\5.InterfaceSystem.csproj", "{4555ABF6-3635-42BE-B6E6-0B1751EC0E56}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "6.MouseController", "MouseController\6.MouseController.csproj", "{A9A1216B-6636-4138-AA2D-AEAF1C675D57}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{4555ABF6-3635-42BE-B6E6-0B1751EC0E56}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4555ABF6-3635-42BE-B6E6-0B1751EC0E56}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4555ABF6-3635-42BE-B6E6-0B1751EC0E56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9A1216B-6636-4138-AA2D-AEAF1C675D57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9A1216B-6636-4138-AA2D-AEAF1C675D57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9A1216B-6636-4138-AA2D-AEAF1C675D57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9A1216B-6636-4138-AA2D-AEAF1C675D57}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
