@@ -3,6 +3,7 @@ namespace GoodsAndSkills
 {
     public class Task
     {
+        public static int p = 0;
         public static Player.Status player_last_status = Player.Status.WALK;
         public static void Story(int i)
         {
@@ -14,17 +15,57 @@ namespace GoodsAndSkills
             DialogResult r1;
             if (i == 0)
             {
-                Message.Show("主角","夏山如碧，绿树成荫，总会令人依然自乐。此地山清水秀，我十分喜爱。我们便约好了，闲暇时，便来此地，沏茶共饮。", "face1_1.png",Message.Face.LEFT);
-                Block();
-                Message.Show("女孩", "嗯，说好了，一言为定。可是怎么感觉你这句话是山寨自哪里的。", "face3_2.png", Message.Face.RIGHT);
-                Block();
-                Message.Show("主角", "(被发现了TAT)", "face2_1.png", Message.Face.LEFT);
-                Block();
+                if (p == 0)
+                {
+                    Message.Showtip("一只破鞋");
+                    Block();
+                }
+                else if (p == 1)
+                {
+                    Message.Showtip("捡起破鞋");
+                    Block();
+                    Form1.npcs[0].x = -100;
+                    p = 2;
+                }
+                else if (p == 2)
+                {
+                   
+                }
             }
             if (i == 1)
             {
-                Message.Showtip("遇到一个人");
-                Block();
+                if (p == 0)
+                {
+                    Message.Show("陌生人", "年轻人，我看你智慧超群，天资聪慧，是百年难得一见的游戏奇才，去，把下面那只鞋给我捡回来。", "face4_2.png", Message.Face.RIGHT);
+                    Block();
+                    Message.Show("主角", "真是个没礼貌的年轻人，不理你了。", "face2_1.png", Message.Face.LEFT);
+                    Block();
+                    Message.Show("陌生人", "拜托，年轻人，好好配合一下，不然剧情怎么发展？", "face4_2.png", Message.Face.RIGHT);
+                    Block();
+                    Message.Show("主角", "好吧，算我倒霉，遇到怪人了。", "face2_1.png", Message.Face.LEFT);
+                    Block();
+                    p = 1;
+
+                }
+                else if (p == 1)
+                {
+                    Message.Show("陌生人", "还不快去捡鞋。", "face4_2.png", Message.Face.RIGHT);
+                    Block();
+                }
+                else if (p == 2)
+                {
+                    Message.Show("陌生人", "孺子可教也。我这里有一本奇书，就此传授于你。你要下苦功钻研这部书。钻研透了，以后可以做帝王的老师。十年后必定有大成就。", "face4_2.png", Message.Face.RIGHT);
+                    Block();
+                    Message.Showtip("获得《罗培羽书》");
+                    Block();
+                    Item.Add_item(5, 1);
+                    p = 3;
+                }
+                else if (p == 3)
+                {
+                    Message.Show("陌生人", "孺子可教也。", "face4_2.png", Message.Face.RIGHT);
+                    Block();
+                }
             }
             if (i == 2)
             {
@@ -37,6 +78,11 @@ namespace GoodsAndSkills
             if (i == 4)
             {
                 Form1.npcs[4].Play_aniation(0);
+            }
+            if (i == 6)
+            {
+                Shop.Show(new int[] { 0, 1, 2, 3, -1, -1, -1 });
+                Block();
             }
             Player.status = player_last_status;
         }

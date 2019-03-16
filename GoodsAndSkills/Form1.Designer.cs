@@ -41,6 +41,8 @@
             this.stage.Size = new System.Drawing.Size(1044, 641);
             this.stage.TabIndex = 0;
             this.stage.TabStop = false;
+            this.stage.Click += new System.EventHandler(this.stage_Click);
+            this.stage.MouseClick += new System.Windows.Forms.MouseEventHandler(this.stage_MouseClick);
             this.stage.MouseEnter += new System.EventHandler(this.stage_MouseEnter);
             this.stage.MouseLeave += new System.EventHandler(this.stage_MouseLeave);
             this.stage.MouseMove += new System.Windows.Forms.MouseEventHandler(this.stage_MouseMove);

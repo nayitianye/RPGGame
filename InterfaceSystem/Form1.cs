@@ -129,7 +129,7 @@ namespace InterfaceSystem
             Map.Change_map(maps, players, npcs, 1, 800, 400, 1, music_player);
             Message.Init();
             Title.Init();
-           // Title.Show();
+            Title.Show();
            
         }
         private void Form1_KeyDown(object sender, KeyEventArgs e)

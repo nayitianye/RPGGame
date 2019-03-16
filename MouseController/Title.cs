@@ -50,7 +50,7 @@ namespace MouseController
             //退出游戏询问框
             //确认
             Button btn_yes = new Button();
-            btn_yes.Set(42, 60, 0, 0, "confirm_yes_1.png", "confirm_yes_2.png", "confirm_yes_2.png", -1, -1, -1, -1);
+            btn_yes.Set(42, 60, 0, 0, "confirm_yes_1.png", "confirm_yes_2.png", "confirm_yes_2.png", -1, 1, -1, -1);
             btn_yes.click_event += new Button.Click_event(Confirm_yes);
             //取消
             Button btn_no = new Button();

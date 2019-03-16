@@ -130,7 +130,6 @@ namespace MouseController
                 }
             }
         }
-     
         //     操控
         public static void Key_ctrl(KeyEventArgs e)
         {
@@ -204,21 +203,25 @@ namespace MouseController
         {
             if (button != null)
             {
+                //遍历按钮
                 for(int i = 0; i < button.Length; i++)
                 {
                     if (button[i] == null)
                     {
                         continue;
                     }
+                    //是否发生碰撞
                     if (button[i].Is_collision(e.X - x, e.Y - y))
                     {
                         current_button = i;
+                        //设置状态
                         Set_button_status(Button.Status.SELECT);
                         break;
                     }
                 }
             }
         }
+        //鼠标点击事件的处理
         public static void Mouse_click(MouseEventArgs e)
         {
             if (panel != null)

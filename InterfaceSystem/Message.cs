@@ -24,7 +24,7 @@ namespace InterfaceSystem
             message.button = new Button[1];
             message.button[0] = button_ok;
             message.Set(0, 415, "msg.png", 0, -1);
-            message.draw_event += new Panel.Draw_event(msgdraw);
+            message.draw_event += new Panel.Draw_event(Msgdraw);
             message.Init();
 
             Button button_ok_tip = new Button();
@@ -33,7 +33,7 @@ namespace InterfaceSystem
             messagetip.button = new Button[1];
             messagetip.button[0] = button_ok_tip;
             messagetip.Set(251, 200, "msgtip.png", 0, -1);
-            messagetip.draw_event += new Panel.Draw_event(msgdrawtip);
+            messagetip.draw_event += new Panel.Draw_event(Msgdrawtip);
             messagetip.Init();
         }
         public static void Button_ok_event()
@@ -63,7 +63,7 @@ namespace InterfaceSystem
             message.Show();
         }
 
-        public static void msgdraw(Graphics graphics, int x_offset, int y_offset)
+        public static void Msgdraw(Graphics graphics, int x_offset, int y_offset)
         {
             //立绘
             if (face != null)
@@ -104,8 +104,8 @@ namespace InterfaceSystem
             }
         }
 
-        //显示文字
-        public static void msgdrawtip(Graphics graphics,int x_offset,int y_offset)
+        //显示文字（信息提示面板）
+        public static void Msgdrawtip(Graphics graphics,int x_offset,int y_offset)
         {
             //画文字
             Font content_font = new Font("黑体", 12);

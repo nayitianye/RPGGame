@@ -192,7 +192,7 @@ namespace MouseController
             Player.Mouse_click(maps, players, new Rectangle(0, 0, stage.Width, stage.Height), e); 
             if (Panel.panel != null)
             {
-                Panel.Mouse_move(e);
+                Panel.Mouse_click(e);
             }
         }
 
@@ -200,7 +200,7 @@ namespace MouseController
         {
             if (Panel.panel != null)
             {
-                Panel.Mouse_click(e);
+                Panel.Mouse_move(e);
             }
             mc_mod = Npc.Check_mouse_collision(maps, players, npcs, new Rectangle(0, 0, stage.Width, stage.Height), e);
         }

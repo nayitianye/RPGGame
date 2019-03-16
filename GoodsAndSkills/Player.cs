@@ -28,14 +28,30 @@ namespace GoodsAndSkills
 
         //图片的偏移位置
         public int x_offset = -120;
-        public int y_offset = -220;  
+        public int y_offset = -220;
+
+        //控制人物的状态
+        public int hp = 100;
+        public int max_hp = 100;
+        public int mp = 100;
+        public int max_mp = 100;
+        public int attack = 10;
+        public int defense = 10;
+        public int fspeed = 10;
+        public int fortune = 10;
+        public int equip_att = -1;
+        public int equip_def=-1;
+        public static int select_player = 0;
+        public Bitmap status_bitmap;   //用于状态面板的图像
+        public int[] skill = { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };   //技能数组
+        public static int money = 200;
+
         //图像
         public Bitmap bitmap;
         //角色是否激活
         public int is_active = 0;  
-        //碰撞(角色)
+        //碰撞(角色)--射线
         public int collision_ray = 80;
-        
         //鼠标操作
         public static int target_x = -1;
         public static int target_y = -1;
@@ -55,6 +71,8 @@ namespace GoodsAndSkills
             move_flag = new Bitmap(@"move_flag.png");
             move_flag.SetResolution(96, 96);
         }
+
+
         /// <summary>
         /// 角色移动的控制
         /// </summary>
@@ -87,6 +105,11 @@ namespace GoodsAndSkills
             else if (e.KeyCode == Keys.D)
             {
                 Walk(players, maps, Comm.Direction.RIGHT);
+            }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                StatusMenu.Show();
+                Task.Block();
             }
             //动画帧  NPC碰撞
             Npc_collision(players, maps, npcs, e);
@@ -311,6 +334,11 @@ namespace GoodsAndSkills
                 target_x = e.X - Map.Get_map_sx(maps, players, rectangle);
                 target_y = e.Y - Map.Get_map_sy(maps, players, rectangle);
                 flag_start_time = Comm.Time();
+            }
+            else if (e.Button == MouseButtons.Right)
+            {
+                StatusMenu.Show();
+                Task.Block();
             }
         }
         public static void Time_logic(Player[] players,Map[] maps)

@@ -8,7 +8,7 @@ namespace InterfaceSystem
     {
         //全部Panel状态
         public static Panel panel = null;      //静态Penel类型，表明当前激活的是哪个界面，panel=null表示没有界面激活
-        private static Player.Status last_player_status = Player.Status.WALK;
+        private static Player.Status last_player_status = Player.Status.WALK;   //用户之间的状态
 
         //表示面板的坐标
         public int x;
@@ -24,8 +24,6 @@ namespace InterfaceSystem
         public int cancel_button = -1; 
         public int current_button = 0;
 
-       
-
         //用来设置Panel
         public void Set(int x0, int y0, string path,int default_button0, int cancel_button0)
         {
@@ -38,8 +36,7 @@ namespace InterfaceSystem
 
         //载入   设置面板的初始化
         public void Init()
-        {
-           
+        {   
             //背景图
             if (bitmap_path != null && bitmap_path != "")
             {
@@ -53,7 +50,6 @@ namespace InterfaceSystem
                 {
                     if (button[i] == null)
                         continue;
-
                     button[i].Load();
                 }
             }
@@ -64,19 +60,19 @@ namespace InterfaceSystem
             panel = this;
             current_button = default_button;
             Set_button_status(Button.Status.SELECT);
+            //显示面板的时候记录角色的状态
             if (Player.status != Player.Status.PANEL)
             {
                 last_player_status = Player.status;
             }    
             Player.status = Player.Status.PANEL;
-
-
         }
 
         //面板的隐藏
         public void Hide()
         {
             panel = null;
+            //隐藏面板的时候还原角色的状态
             Player.status = last_player_status;
         }
 
@@ -89,7 +85,6 @@ namespace InterfaceSystem
                 {
                     if (button[i] == null)
                         continue;
-
                     button[i].status = Button.Status.NOMAL;
                 }
                 if (button[current_button] != null)
@@ -99,18 +94,25 @@ namespace InterfaceSystem
             }
         }
 
-        //     绘图  委托的实例
+        //绘图  委托的实例
         public delegate void Draw_event(Graphics g, int x_offset, int y_offset);
         public event Draw_event draw_event;
         public delegate void Drawbg_event(Graphics g, int x_offset, int y_offset);
         public event Drawbg_event drawbg_event;
 
         //绘图的回调
+        public static void Draw(Graphics g)
+        {
+            if (panel != null)
+                panel.Draw_me(g);
+        }
         public void Draw_me(Graphics g)
         {
             //背景调用D 
             if (drawbg_event != null)
+            {
                 drawbg_event(g, this.x, this.y);
+            }
             //背景图
             if (bitmap != null)
                 g.DrawImage(bitmap, x, y);
@@ -130,11 +132,7 @@ namespace InterfaceSystem
                 }
             }
         }
-        public static void Draw(Graphics g)
-        {
-            if (panel != null)
-                panel.Draw_me(g);
-        }
+        
         //     操控
         public static void Key_ctrl(KeyEventArgs e)
         {
@@ -173,8 +171,7 @@ namespace InterfaceSystem
                 newindex = btn.key_controller.right;
             }
             //判断目标按钮是否有效
-            if (newindex >= 0 && newindex < button.Length
-                && button[newindex] != null)
+            if (newindex >= 0 && newindex < button.Length && button[newindex] != null)
             {
                 current_button = newindex;
                 Set_button_status(Button.Status.SELECT);
@@ -234,7 +231,7 @@ namespace InterfaceSystem
             public int right = -1;
             public int left = -1;
         }
-        //设置按钮的跳转方式
+        //设置按钮的跳转方式 
         public Key_controller key_controller = new Key_controller();
 
         /// <summary>

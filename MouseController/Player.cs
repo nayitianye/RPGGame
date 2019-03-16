@@ -35,7 +35,6 @@ namespace MouseController
         public int is_active = 0;  
         //碰撞(角色)
         public int collision_ray = 80;
-        
         //鼠标操作
         public static int target_x = -1;
         public static int target_y = -1;
@@ -376,7 +375,7 @@ namespace MouseController
                 return 1;
             }
             if (player.y - target_y < -player.speed / 2)
-            {
+            { 
                 return -1;
             }
             return 0;
