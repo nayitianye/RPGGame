@@ -12,8 +12,7 @@ namespace CharacterTroops
 {
     public partial class Form1 : Form
     {
-
-        Player[] player = new Player[3];
+        private Player[] player = new Player[3];
        
         public Form1()
         {

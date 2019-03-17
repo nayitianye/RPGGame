@@ -272,9 +272,9 @@ namespace MouseController
         public string b_select_path;   //鼠标放到按钮上但没有点击的状态
         public string b_press_path;    //按钮被鼠标点击的状态
 
-        Bitmap bitmap_nomal;
-        Bitmap bitmap_select;
-        Bitmap bitmap_press;
+        private Bitmap bitmap_nomal;
+        private Bitmap bitmap_select;
+        private Bitmap bitmap_press;
 
         //状态  定义按钮的三种状态，并定义变量表明按钮的当前状态
         public enum Status 

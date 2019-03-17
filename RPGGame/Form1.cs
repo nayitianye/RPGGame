@@ -12,9 +12,9 @@ namespace RPGGame
 {
     public partial class Form1 : Form
     {
-        int x = 50, y = 50;  //人物的初始位置
-        int face = 1;  //人物的朝向
-        int animation_ctrl = 0;  //控制动画的帧
+        private int x = 50, y = 50;  //人物的初始位置
+        private int face = 1;  //人物的朝向
+        private int animation_ctrl = 0;  //控制动画的帧
         public Form1()
         {
             InitializeComponent();

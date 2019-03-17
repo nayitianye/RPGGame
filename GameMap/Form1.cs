@@ -12,9 +12,9 @@ namespace GameMap
 {
     public partial class Form1 : Form
     {
-        WMPLib.WindowsMediaPlayer music_player = new WMPLib.WindowsMediaPlayer();
-        Player[] player = new Player[3];
-        Map[] maps = new Map[2];
+        private WMPLib.WindowsMediaPlayer music_player = new WMPLib.WindowsMediaPlayer();
+        private Player[] player = new Player[3];
+        private Map[] maps = new Map[2];
         public Form1()
         {
             InitializeComponent();
