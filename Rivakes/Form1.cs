@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace FightSystem
+namespace Rivakes
 {
     public partial class Form1 : Form
     {
@@ -28,11 +28,8 @@ namespace FightSystem
             BufferedGraphicsContext graphicsContext = BufferedGraphicsManager.Current;
             BufferedGraphics bufferedGraphics = graphicsContext.Allocate(graphics, this.DisplayRectangle);
             Graphics graphics1 = bufferedGraphics.Graphics;
-            //自定义的绘图 
-            if (Fight.fighting == 0)
-                Map.Draw(maps, players, npcs, graphics1, new Rectangle(0, 0, stage.Width, stage.Height));
-            else
-                Fight.Draw(graphics1);
+            //自定义的绘图
+            Map.Draw(maps, players, npcs, graphics1, new Rectangle(0, 0, stage.Width, stage.Height));
             //显示图像并释放缓存
             if (Panel.panel != null)
             {
@@ -56,8 +53,6 @@ namespace FightSystem
             Title.Init();
             Title.Show();
             Shop.Init();
-            //Fight.Init();
-            Fight.Start(new int[] { 0, 0, -1 }, "fight/f_scene.png", 1, 0, 1, 1, 100);
             StatusMenu.Init();
         }
 
@@ -137,5 +132,7 @@ namespace FightSystem
         {
             Cursor.Show();
         }
+
+
     }
 }

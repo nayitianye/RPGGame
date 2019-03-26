@@ -45,6 +45,12 @@ namespace RPGGame
             }
             Draw();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void Draw()
         {
             Bitmap bitmap = new Bitmap(@"r1.png");
