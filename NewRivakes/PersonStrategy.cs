@@ -44,7 +44,6 @@
             protagonist.Role = 2;
             return protagonist;
         }
-
     }
     public class MagicStrategy : PersonStrategy
     {
@@ -65,5 +64,4 @@
             return protagonist;
         }
     }
-
 }

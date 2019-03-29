@@ -10,9 +10,9 @@
         //角色的性别
         private int empiric;
         //经验值 角色当前的经验值
-        private int np;
+        private int Hp;
         //生命值血量
-        private int max_np;
+        private int max_Hp;
         //最大的生命值
         private int mp;
         //内力、蓝
@@ -43,12 +43,13 @@
         private int role;
         //表示角色的类型
         private string image_path;
+        //技能数组
+        public int[] skills = { -1, -1, -1, -1 };
 
         public string Name { get => name; set => name = value; }
         public int Lv { get => lv; set => lv = value; }
         public int Empiric { get => empiric; set => empiric = value; }
-        public int Np { get => np; set => np = value; }
-        public int Max_np { get => max_np; set => max_np = value; }
+ 
         public int Mp { get => mp; set => mp = value; }
         public int Max_mp { get => max_mp; set => max_mp = value; }
         public int Power { get => power; set => power = value; }
@@ -65,14 +66,28 @@
         public string Sex { get => sex; set => sex = value; }
         public string Image_path { get => image_path; set => image_path = value; }
         public int Role { get => role; set => role = value; }
+        public int Hp1 { get => Hp; set => Hp = value; }
+        public int Max_Hp { get => max_Hp; set => max_Hp = value; }
 
         private string Description(string name,int mp,int np)
         {
             return name + "当前的血量为：" + mp + "内力为：" + np;
         }
-        public string Attack_Enemy(Enemy enemy)
+
+        //返回攻击描述
+        public string Attack_Enemy_Des(Enemy enemy,Protagonist protagonist)
         {
-        
+            enemy.Hp1 = enemy.Hp1 - protagonist.Attack + enemy.Defense;
+            return enemy.Name + "遭受你的攻击,剩余血量" + enemy.Hp1;
         }
+
+        //返回敌人的状态
+        public Enemy Attack_Enemy_Staus(Enemy enemy,Protagonist protagonist)
+        {
+            enemy.Hp1 = enemy.Hp1 - protagonist.Attack + enemy.Defense;
+            return enemy;
+        }
+
+
     }
 }

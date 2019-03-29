@@ -31,7 +31,6 @@
             this.StateBtn = new System.Windows.Forms.Button();
             this.PacksackBtn = new System.Windows.Forms.Button();
             this.RivakesBtn = new System.Windows.Forms.Button();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
@@ -51,10 +50,11 @@
             this.PacksackBtn.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.PacksackBtn.Location = new System.Drawing.Point(349, 607);
             this.PacksackBtn.Name = "PacksackBtn";
-            this.PacksackBtn.Size = new System.Drawing.Size(164, 63);
+            this.PacksackBtn.Size = new System.Drawing.Size(201, 63);
             this.PacksackBtn.TabIndex = 2;
-            this.PacksackBtn.Text = "装备";
+            this.PacksackBtn.Text = "装备和技能";
             this.PacksackBtn.UseVisualStyleBackColor = true;
+            this.PacksackBtn.Click += new System.EventHandler(this.PacksackBtn_Click);
             // 
             // RivakesBtn
             // 
@@ -67,19 +67,11 @@
             this.RivakesBtn.UseVisualStyleBackColor = true;
             this.RivakesBtn.Click += new System.EventHandler(this.RivakesBtn_Click);
             // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(12, 467);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(726, 132);
-            this.richTextBox1.TabIndex = 4;
-            this.richTextBox1.Text = "";
-            // 
             // panel1
             // 
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(726, 449);
+            this.panel1.Size = new System.Drawing.Size(731, 589);
             this.panel1.TabIndex = 5;
             this.panel1.Visible = false;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
@@ -90,7 +82,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(750, 671);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.RivakesBtn);
             this.Controls.Add(this.PacksackBtn);
             this.Controls.Add(this.StateBtn);
@@ -106,7 +97,6 @@
         private System.Windows.Forms.Button StateBtn;
         private System.Windows.Forms.Button PacksackBtn;
         private System.Windows.Forms.Button RivakesBtn;
-        private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Panel panel1;
     }
 }

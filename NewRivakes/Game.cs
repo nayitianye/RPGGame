@@ -56,47 +56,38 @@ namespace NewRivakes
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Protagonist protagonist=new Protagonist();
-            Context context=null;
-            protagonist.Max_mp = 100;
-            protagonist.Max_mp = 100;
-            protagonist.Mp = 100;
-            protagonist.Np = 100;
-            if (textBox1.Text == "")
-            {
-                MessageBox.Show("请输入名字");
-            }
-            protagonist.Name = textBox1.Text;
-            if (strsex != "")
-            {
-                protagonist.Sex = strsex;
-            }
-            else
-            {
-                MessageBox.Show("请选择性别");
-            }
-            if(flag==4)
-            {
-                MessageBox.Show("请选择角色类型");
-            }
+            Equipment.equipment = new Equipment[20];
+            Equipment.equipment[0] = new HeadEquip();
+            Equipment.equipment[0].Init();
+            Equipment.equipment[1] = new BodyEquip();
+            Equipment.equipment[1].Init();
+            Equipment.equipment[2] = new FootEquip();
+            Equipment.equipment[2].Init();
+            Equipment.equipment[3] = new WeaponEquip();
+            Equipment.equipment[3].Init();
+            Equipment.equipment[4] = new WeaponEquip();
+            Equipment.equipment[4].GetInit(10,5, 0, 1, "普通的铁剑");
+            Protagonist1 protagonist = null ;
             switch (flag)
             {
                 case 1:
-                    protagonist.Role = 1;
-                    context = new Context(new DecentStrategy());
-                    protagonist = context.ContextInterface(protagonist);
+                    protagonist = new ProtagonistYan(); 
                     break;
                 case 2:
-                    protagonist.Role = 2;
-                    context = new Context(new CultStrategy());
-                    protagonist = context.ContextInterface(protagonist);
+                    protagonist = new ProtagonistYin();
                     break;
                 case 3:
-                    protagonist.Role = 3;
-                    context = new Context(new MagicStrategy());
-                    protagonist = context.ContextInterface(protagonist);
+                    protagonist = new ProtagonistMo();
+                    protagonist.Init(textBox1.Text.ToString(), strsex);
+                    protagonist.Set_Attributre();
                     break;
             }
+            protagonist.Set_Attributre();
+            protagonist.Equip(Equipment.equipment[0],protagonist,0);
+            protagonist.Equip(Equipment.equipment[1], protagonist,1);
+            protagonist.Equip(Equipment.equipment[2], protagonist,2);
+            protagonist.Equip(Equipment.equipment[3], protagonist,3);
+            protagonist.Init(textBox1.Text.ToString(),strsex);
             Hide();
             MainForm mainForm = new MainForm(protagonist);
             mainForm.Show();
@@ -112,9 +103,6 @@ namespace NewRivakes
             strsex = "男";
         }
 
-        private void role3_Click(object sender, EventArgs e)
-        {
 
-        }
     }
 }

@@ -79,7 +79,6 @@
             this.role3.TabIndex = 2;
             this.role3.TabStop = false;
             this.role3.WaitOnLoad = true;
-            this.role3.Click += new System.EventHandler(this.role3_Click);
             this.role3.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox3_MouseClick);
             // 
             // label1

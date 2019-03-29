@@ -17,24 +17,24 @@ namespace NewRivakes
 
         public Enemy(int Hp,int attack,int defence,int level,string name)
         {
-            this.attack= attack;
-            this.defense = defence;
-            this.totalHp= Hp;
-            this.Hp = Hp;
-            this.level= level;
-            this.name = name;
+            this.Attack= attack;
+            this.Defense = defence;
+            this.TotalHp= Hp;
+            this.Hp1 = Hp;
+            this.Level= level;
+            this.Name = name;
         }
+
+        public int TotalHp { get => totalHp; set => totalHp = value; }
+        public int Hp1 { get => Hp; set => Hp = value; }
+        public int Attack { get => attack; set => attack = value; }
+        public int Defense { get => defense; set => defense = value; }
+        public int Level { get => level; set => level = value; }
+        public string Name { get => name; set => name = value; }
+
         public string  Description(string name,string description)
         {
             return name + "凶狠的向你扑来," + description;
-        }
-
-        public int TotalHp { get; set; }
-        public int Hp1 { get; set; }
-        public int Attack { get; set; }
-        public int Defense { get; set; }
-        public int Level { get ; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
+        }    
     }
 }

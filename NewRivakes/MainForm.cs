@@ -6,23 +6,31 @@ namespace NewRivakes
 {
     public partial class MainForm : Form
     {
-        private Protagonist protagonist;
         private Player player;
+        private Protagonist1 protagonist;
+        private Equipment[] equipment;
 
         public MainForm()
         {
             InitializeComponent();
         }
 
-        public MainForm(Protagonist protagonist)
+
+        public MainForm(Player player)
+        {
+            this.player = player;
+        }
+
+        public MainForm(Protagonist1 protagonist)
         {
             this.protagonist = protagonist;
             InitializeComponent();
         }
 
-        public MainForm(Player player)
+        public MainForm(Protagonist1 protagonist, Equipment[] equipment) : this(protagonist)
         {
-            this.player = player;
+            this.equipment = equipment;
+            InitializeComponent();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -56,7 +64,7 @@ namespace NewRivakes
 
         private void RivakesBtn_Click(object sender, EventArgs e)
         {
-            Rivakes rivakes = new Rivakes();
+            Rivakes rivakes = new Rivakes(protagonist);
             rivakes.FormBorderStyle = FormBorderStyle.None;
             rivakes.TopLevel = false;
             panel1.Visible = true;
@@ -64,6 +72,18 @@ namespace NewRivakes
             panel1.Controls.Add(rivakes);
             rivakes.Visible = true;
             rivakes.Show();
+        }
+
+        private void PacksackBtn_Click(object sender, EventArgs e)
+        {
+            EquipAndSkills equipAndSkills = new EquipAndSkills(protagonist);
+            equipAndSkills.FormBorderStyle = FormBorderStyle.None;
+            equipAndSkills.TopLevel = false;
+            panel1.Visible = true;
+            panel1.Controls.Clear();
+            panel1.Controls.Add(equipAndSkills);
+            equipAndSkills.Visible = true;
+            equipAndSkills.Show();
         }
     }
 }

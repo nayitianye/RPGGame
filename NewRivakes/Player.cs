@@ -31,5 +31,6 @@
         private int role;
         //表示角色的类型、门派
         private string image_path;
+
     }
 }
