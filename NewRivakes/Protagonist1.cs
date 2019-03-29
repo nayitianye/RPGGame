@@ -8,7 +8,9 @@ namespace NewRivakes
 {
     public abstract class Protagonist1
     {
-        WeaponBehavior weaponBehavior ;
+
+        protected Skills skills;
+//        WeaponBehavior weaponBehavior ;
         private string name;
         //姓名   用户角色名称
         private int level;
@@ -45,6 +47,8 @@ namespace NewRivakes
         private int equip_body = -1;
         private int equip_foot = -1;
         private int equip_weapon = -1;
+
+        public int[] skill = { -1, -1, -1, -1 };
         public  string Name { get => name; set => name = value; }
         public  int Level { get => level; set => level = value; }
         public string Sex { get => sex; set => sex = value; }
@@ -66,6 +70,26 @@ namespace NewRivakes
         public int Equip_foot { get => equip_foot; set => equip_foot = value; }
         public int Equip_weapon { get => equip_weapon; set => equip_weapon = value; }
 
+        public void SetSkills(Skills skills)
+        {
+            this.skills = skills;
+        }
+        public virtual void Operation()
+        {
+            skills.Operation();
+        }
+        public virtual int  CostMp()
+        {
+            return skills.CostMP();
+        }
+        public string Current_status()
+        {
+            return Name + "当前的状态为：\n" + "攻击力:" + Attack + "\n防御力:" + Defense + "\n速度:" + Speed + "\n血量:" + Hp + "\n内力:" + Mp+"\n";
+        }
+        public string Use_Skill()
+        {
+            return Name + "使用技能后的状态为：\n" + "攻击力:" + Attack + "\n防御力:" + Defense + "\n速度:" + Speed + "\n血量:" + Hp + "\n内力:" + Mp + "\n";
+        }
         public void Init(string name,string sex)
         {
             this.Name = name;
@@ -148,37 +172,24 @@ namespace NewRivakes
                 protagonist.Equip_weapon = -1;
             }
         }
-        //public int Get_empic(int Lv1,int Lv2)
-        //{
-        //    int empiric;
-        //    if (Lv1 > Lv2)
-        //    {
-        //        empiric = (int)(10 / (Lv1 - Lv2));
-        //    }
-        //    else
-        //    {
-        //        empiric = 4 * (Lv2 - Lv1);
-        //    }
-        //    return empiric;
-        //}
         public abstract void Set_Attributre();
         public abstract void LevelUp(int level, int empic);
-        ////返回攻击描述
-        //public string Attack_Enemy_Des(Enemy enemy, Protagonist1 protagonist)
-        //{
-        //    enemy.Hp1 = enemy.Hp1 - protagonist.Attack + enemy.Defense;
-        //    return enemy.Name + "遭受你的攻击,剩余血量" + enemy.Hp1;
-        //}
-
-        ////返回敌人的状态
-        //public Enemy Attack_Enemy_Staus(Enemy enemy, Protagonist1 protagonist)
-        //{
-        //    enemy.Hp1 = enemy.Hp1 - protagonist.Attack + enemy.Defense;
-        //    return enemy;
-        //}
     }
     public class ProtagonistYan : Protagonist1
     {
+        private static ProtagonistYan protagonist;
+        private ProtagonistYan()
+        {
+
+        }
+        public static ProtagonistYan GetProtagonist()
+        {
+            if (protagonist == null)
+            {
+                protagonist = new ProtagonistYan();
+            }
+            return protagonist;
+        }
 
         public override void Set_Attributre()
         {
@@ -199,10 +210,35 @@ namespace NewRivakes
             this.Furtune +=1;
             this.Speed +=1;
             this.Power +=1;
+            this.Max_Hp += 10;
+            this.Max_Mp += 10;
+            this.Hp = Max_Hp;
+            this.Mp = Max_Mp;
+        }
+        public override void Operation()
+        {
+            base.Operation();
+        }
+        public override int  CostMp()
+        {
+           return base.CostMp();
         }
     }
     public class ProtagonistYin : Protagonist1
     {
+        private static ProtagonistYin protagonist;
+        private ProtagonistYin()
+        {
+
+        }
+        public static ProtagonistYin GetProtagonist()
+        {
+            if (protagonist == null)
+            {
+                protagonist = new ProtagonistYin();
+            }
+            return protagonist;
+        }
         public override void Set_Attributre()
         {
             this.Attack = 12;
@@ -222,10 +258,35 @@ namespace NewRivakes
             this.Furtune += 1;
             this.Speed += 1;
             this.Power += 1;
+            this.Max_Hp += 10;
+            this.Max_Mp += 10;
+            this.Hp = Max_Hp;
+            this.Mp = Max_Mp;
+        }
+        public override void Operation()
+        {
+            base.Operation();
+        }
+        public override int CostMp()
+        {
+            return base.CostMp();
         }
     }
     public class ProtagonistMo : Protagonist1
     {
+        private static ProtagonistMo protagonist;
+        private ProtagonistMo()
+        {
+
+        }
+        public static ProtagonistMo GetProtagonist()
+        {
+            if (protagonist == null)
+            {
+                protagonist = new ProtagonistMo();
+            }
+            return protagonist;
+        }
         public override void Set_Attributre()
         {
             this.Attack = 8;
@@ -240,11 +301,23 @@ namespace NewRivakes
         {
             this.Level += 1;
             this.Empiric -= Level * 10;
+            this.Max_Hp += 10;
+            this.Max_Mp += 10;
+            this.Hp = Max_Hp;
+            this.Mp = Max_Mp;
             this.Attack += 1;
             this.Defense += 3;
             this.Furtune += 1;
             this.Speed += 1;
             this.Power += 1;
+        }
+        public override void Operation()
+        {
+            base.Operation();
+        }
+        public override int CostMp()
+        {
+            return base.CostMp();
         }
     }
 }

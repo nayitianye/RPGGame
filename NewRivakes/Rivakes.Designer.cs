@@ -33,7 +33,6 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
@@ -94,15 +93,7 @@
             this.button6.TabIndex = 5;
             this.button6.Text = "江洋大盗";
             this.button6.UseVisualStyleBackColor = true;
-            // 
-            // button8
-            // 
-            this.button8.Location = new System.Drawing.Point(288, 243);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(108, 63);
-            this.button8.TabIndex = 7;
-            this.button8.Text = "占地为王";
-            this.button8.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // label1
             // 
@@ -116,12 +107,13 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(16, 243);
+            this.button5.Location = new System.Drawing.Point(9, 243);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(108, 63);
             this.button5.TabIndex = 21;
             this.button5.Text = "武林大会";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button7
             // 
@@ -131,6 +123,7 @@
             this.button7.TabIndex = 22;
             this.button7.Text = "华山之巅";
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // button9
             // 
@@ -150,6 +143,7 @@
             this.button10.TabIndex = 25;
             this.button10.Text = "技能B";
             this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // button11
             // 
@@ -159,6 +153,7 @@
             this.button11.TabIndex = 24;
             this.button11.Text = "技能Ａ";
             this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // button12
             // 
@@ -168,6 +163,7 @@
             this.button12.TabIndex = 26;
             this.button12.Text = "技能C";
             this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
             // button13
             // 
@@ -177,6 +173,7 @@
             this.button13.TabIndex = 27;
             this.button13.Text = "技能Ｄ";
             this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
             // button14
             // 
@@ -184,8 +181,9 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(108, 63);
             this.button14.TabIndex = 28;
-            this.button14.Text = "逃跑";
+            this.button14.Text = "当前状态";
             this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
             // richTextBox1
             // 
@@ -210,7 +208,6 @@
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button8);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
@@ -231,7 +228,6 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button7;

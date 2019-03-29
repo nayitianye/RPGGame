@@ -71,7 +71,6 @@ namespace NewRivakes
             this.Speed = speed;
             this.Name = name;
         }
-
     }
 
     public class BodyEquip : Equipment

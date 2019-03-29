@@ -56,6 +56,16 @@ namespace NewRivakes
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (textBox1.Text == "")
+            {
+                MessageBox.Show("请取一个响亮的称呼！");
+                return;
+            }
+            if (!radioButton1.Checked && !radioButton2.Checked)
+            {
+                MessageBox.Show("请选择性别！");
+                return;
+            }
             Equipment.equipment = new Equipment[20];
             Equipment.equipment[0] = new HeadEquip();
             Equipment.equipment[0].Init();
@@ -67,17 +77,26 @@ namespace NewRivakes
             Equipment.equipment[3].Init();
             Equipment.equipment[4] = new WeaponEquip();
             Equipment.equipment[4].GetInit(10,5, 0, 1, "普通的铁剑");
-            Protagonist1 protagonist = null ;
+            Skills.skills = new Skills[4];
+            Skills.skills[0] = new ConcreteImplementA();
+            Skills.skills[0].Init();
+            Skills.skills[1] = new ConcreteImplementB();
+            Skills.skills[1].Init();
+            Skills.skills[2] = new ConcreteImplementC();
+            Skills.skills[2].Init();
+            Skills.skills[3] = new ConcreteImplementD();
+            Skills.skills[3].Init();
+            Protagonist1  protagonist = null ;
             switch (flag)
             {
                 case 1:
-                    protagonist = new ProtagonistYan(); 
+                    protagonist = ProtagonistYan.GetProtagonist(); 
                     break;
                 case 2:
-                    protagonist = new ProtagonistYin();
+                    protagonist = ProtagonistYin.GetProtagonist();
                     break;
                 case 3:
-                    protagonist = new ProtagonistMo();
+                    protagonist = ProtagonistMo.GetProtagonist();
                     protagonist.Init(textBox1.Text.ToString(), strsex);
                     protagonist.Set_Attributre();
                     break;

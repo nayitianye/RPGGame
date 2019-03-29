@@ -6,32 +6,119 @@ using System.Threading.Tasks;
 
 namespace NewRivakes
 {
-    public class Skills
+    public abstract class Skills
     {
         public static Skills[] skills;
-        public string name = "";
-        public string description = "";
-        public int MP;
-        public int type;   //表示技能的类型：用于自身还是用于自己
+        private string name;
+        private int mP;
+        private int hP;
+        private int damage;
+        private int defense;
+        private int type;   //表示技能的类型：用于自身还是用于自己
 
-        public void Set(string name,string description,int mp)
+        public string Name { get => name; set => name = value; }
+        public int MP { get => mP; set => mP = value; }
+        public int HP { get => hP; set => hP = value; }
+        public int Damage { get => damage; set => damage = value; }
+        public int Defense { get => defense; set => defense = value; }
+        public int Type { get => type; set => type = value; }
+
+        public void Set(string name, int mp, int hp, int damage, int defense, int type)
         {
-            this.name = name;
-            this.description = description;
-            this.MP = mp; 
+            this.Name = name;
+            this.MP = mp;
+            this.HP = hp;
+            this.Damage = damage;
+            this.Defense = defense;
+            this.Type = type;
         }
 
+        public abstract void Init();
+        public abstract void Operation();
 
-        //使用  定义委托类型
-        public delegate void Use_event(Skills skill);
-        public event Use_event use_event;
-        public void Use(Protagonist protagonist)
+        public abstract int CostMP();
+    }
+    public class ConcreteImplementA : Skills
+    {
+        public override void Operation()
         {
-            if (protagonist.Mp < MP)  //mp判断
-                return;
-            protagonist.Mp -= MP ;   //减去mp
-            if (use_event != null)
-                use_event(this);   //使用技能
+            Console.WriteLine("使用了A技能");
+        }
+
+        public override void Init()
+        {
+            this.Name = "技能A";
+            this.HP = 10;
+            this.MP = 0;
+            this.Damage = 0;
+            this.Defense = 0;
+            this.Type = 0;
+        }
+        public override int CostMP()
+        {
+            return 5;
         }
     }
+    public class ConcreteImplementB: Skills
+    {
+        public override void Operation()
+        {
+            Console.WriteLine("使用了B技能");
+        }
+        public override void Init()
+        {
+            this.Name = "技能B";
+            this.HP = 0;
+            this.MP = 0;
+            this.Damage = 0;
+            this.Defense = 2;
+            this.Type = 0;
+        }
+        public override int CostMP()
+        {
+            return 10;
+        }
+    }
+    public class ConcreteImplementC : Skills
+    {
+        public override void Operation()
+        {
+            Console.WriteLine("使用了C技能");
+        }
+        public override void Init()
+        {
+            this.Name = "技能C";
+            this.HP = 0;
+            this.MP = 0;
+            this.Damage = 20;
+            this.Defense = 0;
+            this.Type = 1;
+        }
+        public override int CostMP()
+        {
+            return 15;
+        }
+
+    }
+    public class ConcreteImplementD : Skills
+    {
+        public override void Operation()
+        {
+            Console.WriteLine("使用了D技能");
+        }
+        public override void Init()
+        {
+            this.Name = "技能D";
+            this.HP = 0;
+            this.MP = 100;
+            this.Damage = 0;
+            this.Defense = 0;
+            this.Type = 0;
+        }
+        public override int CostMP()
+        {
+            return 40;
+        }
+    }
+
 }

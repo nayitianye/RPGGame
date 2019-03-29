@@ -27,11 +27,6 @@ namespace NewRivakes
             InitializeComponent();
         }
 
-        public MainForm(Protagonist1 protagonist, Equipment[] equipment) : this(protagonist)
-        {
-            this.equipment = equipment;
-            InitializeComponent();
-        }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
