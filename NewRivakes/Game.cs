@@ -13,7 +13,7 @@ namespace NewRivakes
     public partial class Game : Form
     {
 
-        int flag = 4;
+        int type = 4;
         string strsex;
         public Game()
         {
@@ -32,7 +32,7 @@ namespace NewRivakes
                 "追杀至龙口关，联同剑皇等对抗降世神君，最终与傲天客舍身成仁击败降世神君，其母在护其逃亡其中被天神教众杀害，" +
                 "年幼的他被剑皇的总护法凌峰所救，从此在道火村修炼武功成长为正派的后继人才。他与任天有深厚的交情，" +
                 "自从任天被陷害沦落为逃亡者之后，为了给任天洗清冤屈而努力揭开所有事件的真相。 ");
-            flag = 1;
+           type = 1;
         }
 
         private void pictureBox2_MouseClick(object sender, MouseEventArgs e)
@@ -42,7 +42,7 @@ namespace NewRivakes
                 "后来成为孤儿沦落天涯时，被刀帝的门人官叶所收留，培养成为了很受期望的杀手。" +
                 "但由于天神祭品事件来的后遗症，潜在心中的魔性经常发作而倍受折磨。" +
                 "为了摆脱自己被诅咒了的命运，决心与天神敎展开孤立的战斗。");
-            flag = 2;
+            type = 2;
         }
 
         private void pictureBox3_MouseClick(object sender, MouseEventArgs e)
@@ -51,7 +51,7 @@ namespace NewRivakes
                 "天生意志坚强躲在母亲怀中目睹亲人被杀也未露声息，终于保住了性命。" +
                 "后被魔尊门人血流天刹获救，教导其武功，时刻不忘记灭门大仇，" +
                 "逐抛弃了人性选择成为魔人的孤独道路，成为魔尊血盟的新培武士之中最强的夜叉。");
-            flag = 3;
+            type = 3;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -77,6 +77,12 @@ namespace NewRivakes
             Equipment.equipment[3].Init();
             Equipment.equipment[4] = new WeaponEquip();
             Equipment.equipment[4].GetInit(10,5, 0, 1, "普通的铁剑");
+            Equipment.equipment[5] = new HeadEquip();
+            Equipment.equipment[5].GetInit(10, 0, 2, -1, "普通的头盔");
+            Equipment.equipment[6] = new FootEquip();
+            Equipment.equipment[6].GetInit(10, 1, 0, 3, "普通的皮鞋");
+            Equipment.equipment[7] = new FootEquip();
+            Equipment.equipment[7].GetInit(10, 0, 3, -3, "普通的锁子甲");
             Skills.skills = new Skills[4];
             Skills.skills[0] = new ConcreteImplementA();
             Skills.skills[0].Init();
@@ -86,21 +92,12 @@ namespace NewRivakes
             Skills.skills[2].Init();
             Skills.skills[3] = new ConcreteImplementD();
             Skills.skills[3].Init();
-            Protagonist1  protagonist = null ;
-            switch (flag)
+            Protagonist1 protagonist = null ;
+            if (type != 4)
             {
-                case 1:
-                    protagonist = ProtagonistYan.GetProtagonist(); 
-                    break;
-                case 2:
-                    protagonist = ProtagonistYin.GetProtagonist();
-                    break;
-                case 3:
-                    protagonist = ProtagonistMo.GetProtagonist();
-                    protagonist.Init(textBox1.Text.ToString(), strsex);
-                    protagonist.Set_Attributre();
-                    break;
+                protagonist = ProtagoinstFactory.CreateProtagoinst(type);
             }
+            protagonist.Init(textBox1.Text.ToString(), strsex);
             protagonist.Set_Attributre();
             protagonist.Equip(Equipment.equipment[0],protagonist,0);
             protagonist.Equip(Equipment.equipment[1], protagonist,1);

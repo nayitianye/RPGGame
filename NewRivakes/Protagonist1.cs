@@ -10,7 +10,6 @@ namespace NewRivakes
     {
 
         protected Skills skills;
-//        WeaponBehavior weaponBehavior ;
         private string name;
         //姓名   用户角色名称
         private int level;

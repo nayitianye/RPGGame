@@ -199,7 +199,6 @@ namespace NewRivakes
             {
                 return;
             }
-           // index = equipment.Type;
             switch (equipment.Type)
             {
                 case 0:

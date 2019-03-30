@@ -52,7 +52,7 @@
             this.PacksackBtn.Name = "PacksackBtn";
             this.PacksackBtn.Size = new System.Drawing.Size(201, 63);
             this.PacksackBtn.TabIndex = 2;
-            this.PacksackBtn.Text = "装备和技能";
+            this.PacksackBtn.Text = "装备强化";
             this.PacksackBtn.UseVisualStyleBackColor = true;
             this.PacksackBtn.Click += new System.EventHandler(this.PacksackBtn_Click);
             // 

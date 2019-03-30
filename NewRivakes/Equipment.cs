@@ -17,7 +17,7 @@ namespace NewRivakes
         private int defense;
         //装备的防御力
         private int speed;
-        //装备的加成数独
+        //装备的加成速度
         private string name;
         //装备的名称
         public int Type { get => type; set => type = value; }
